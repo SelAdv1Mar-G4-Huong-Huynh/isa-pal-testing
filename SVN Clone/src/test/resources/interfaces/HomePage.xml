@@ -5,3 +5,4 @@
 	<PageItem name="lnkSignUpTab" by="XPath">//a[contains(@href,'signup.php')]</PageItem>
 	<PageItem name="lnkFreeWebSiteTab" by="XPath">//a[contains(@href,'signup.php')]</PageItem>
 </Page>
+<!--trdgd-->
