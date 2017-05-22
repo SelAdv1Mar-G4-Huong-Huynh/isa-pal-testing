@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page name="Edit Website :: Skypnova.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="BasePageXML.xsd">
+	<PageItem name="txtName" by="XPath">///input[@name='name']</PageItem>
+	<PageItem name="txtAddress" by="XPath">//textarea[@id='address']</PageItem>
+	<PageItem name="cbbTimeZone" by="XPath">//select[@name='time_zone']</PageItem>
+	<PageItem name="cbbDateFormat" by="XPath">//select[@name='date_format']</PageItem>
+	<PageItem name="btnSave" by="XPath">//input[@name='submitButton']</PageItem>
+	<PageItem name="btnSave" by="XPath">//table[@id='infoMessage']</PageItem>	
+</Page>

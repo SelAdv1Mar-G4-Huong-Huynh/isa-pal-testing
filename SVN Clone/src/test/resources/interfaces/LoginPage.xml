@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page name="Free Sign Up :: Skypnova.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="BasePageXML.xsd">
+	<PageItem name="txtEmailAddress" by="XPath">//input[@name='emailaddress']</PageItem>
+	<PageItem name="txtPassword" by="XPath">//input[@name='password']</PageItem>
+	<PageItem name="btnLogin" by="XPath">//button[@name='submit']</PageItem>
+	<PageItem name="lblErorMsg" by="XPath">//div[@id='no_vendor']</PageItem>
+
+</Page>

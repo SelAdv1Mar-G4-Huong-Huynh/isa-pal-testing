@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Page name="Edit Website :: Skypnova.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="BasePageXML.xsd">
+	<PageItem name="lblEmail" by="XPath">//div[@id = 'top-utilities']/ul/li[@class='hover-menu-text']</PageItem>
+	<PageItem name="lnkLogout" by="XPath">//a[contains(@onclick,'logout.php')]</PageItem>
+	<PageItem name="lblPageName" by="XPath">//h1[@class='aynax-h1']</PageItem>
+	<PageItem name="btnPages" by="XPath">//a[@data-target='#addPages']</PageItem>
+	<PageItem name="btnPreview" by="XPath">//a[@data-target='#preview']</PageItem>
+	<PageItem name="btnSave" by="XPath">//button[@id='jSaveSite']</PageItem>
+	<PageItem name="lnkSettings" by="XPath">//a[.='Settings']</PageItem>
+	<PageItem name="lnkMyProfile" by="XPath">//a[contains(@href,'editProfileNew.php')]</PageItem>
+	
+</Page>
