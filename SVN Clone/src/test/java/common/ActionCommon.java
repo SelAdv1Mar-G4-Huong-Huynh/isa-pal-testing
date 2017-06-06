@@ -44,6 +44,7 @@ public class ActionCommon {
                 FileUtils.copyFile(file, new File("src/test/target/" + dateFormat.format(new Date()) + ".jpg"));
                 
                 System.out.println("Please refer the screenshot at " + file.getPath() + " for detail");
+               
                 return file.getPath();
             } catch (IOException e) {
                 System.err.println("Exception while taking screenshot" + e.getMessage());

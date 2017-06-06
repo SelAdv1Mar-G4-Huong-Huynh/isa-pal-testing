@@ -34,4 +34,7 @@ public class HomePage extends BasePage {
     	//PageFactory.initElements(driver,LoginPage.class);
     	return new FreeWebSitePage();
     }
+    public void testok(){
+        System.out.println("fđfd test ok");
+    }
 }

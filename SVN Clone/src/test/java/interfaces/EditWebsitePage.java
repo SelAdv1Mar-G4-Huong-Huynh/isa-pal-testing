@@ -12,6 +12,10 @@ public class EditWebsitePage extends BasePage {
 		super(wdriver);
 		loadControls("EditWebsitePage");		
 	}
+        public void aaOK()
+        {
+            System.out.println("This is edit web page");
+        }
 	
 	
 	

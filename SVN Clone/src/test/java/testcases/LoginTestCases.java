@@ -5,7 +5,9 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import common.Constant;
 import interfaces.EditWebsitePage;
+import interfaces.HomePage;
 import interfaces.LoginPage;
+import org.openqa.selenium.support.PageFactory;
 
 
 public class LoginTestCases extends BaseTestCase{
@@ -20,7 +22,7 @@ public class LoginTestCases extends BaseTestCase{
 	 * VP Verify that message "Incorrect e-mail address. Please check the spelling of your e-mail address and try again.."
 	 * 
 	 ************************************************/
-  @Test
+ // @Test
   public void LoginTC01(){
 	  System.out.println("TC01 - User can log into Twitter with invalid username and password.");
       LoginPage loginPage = homePage.goToLoginPage();     
@@ -67,9 +69,32 @@ public class LoginTestCases extends BaseTestCase{
    //@Test  
    public void LoginTC03(){
  	  System.out.println("TC03 - Update user profile.");
-       LoginPage loginPage = homePage.goToLoginPage();     
-       EditWebsitePage editPage = loginPage.Login(Constant.UserName, Constant.Password);      
-       
+       //LoginPage loginPage = homePage.goToLoginPage();     
+      // EditWebsitePage editPage = loginPage.Login(Constant.UserName, Constant.Password);      
+     
+      LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class );
+   }
+  @Test  
+   public void LoginTC04(){
+ 	  System.out.println("TC03 - Update user profile.");
+      LoginPage loginPage = homePage.goToLoginPage();     
+      // EditWebsitePage editPage = loginPage.Login(Constant.UserName, Constant.Password);      
+     
+     HomePage hp = loginPage.openFooter("Home Page", HomePage.class );
+     hp.testok();
+     
+     EditWebsitePage ed = loginPage.openFooter("Edit PAge", EditWebsitePage.class );
+     ed.aaOK();
+     
+   }
+    @Test  
+   public void LoginTC05(){
+ 	  System.out.println("TC05 - Update user profile.");
+      LoginPage loginPage = homePage.goToLoginPage();     
+      // EditWebsitePage editPage = loginPage.Login(Constant.UserName, Constant.Password);      
+     
+     Assert.assertEquals(true, false,"Failed");
+     
    }
  
 }

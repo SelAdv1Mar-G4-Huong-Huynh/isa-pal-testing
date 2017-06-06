@@ -1,5 +1,7 @@
 package testcases;
 
+import interfaces.LoginPage;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.*;
 
 public class test {
@@ -18,11 +20,12 @@ public class test {
  
     @Test
     public void testMethodsOne() {
+      
         long id = Thread.currentThread().getId();
         System.out.println("Simple test-method One. Thread id is: " + id);
     }
  
-    @Test
+    //@Test
     public void testMethodsTwo() {
         long id = Thread.currentThread().getId();
         System.out.println("Simple test-method Two. Thread id is: " + id);

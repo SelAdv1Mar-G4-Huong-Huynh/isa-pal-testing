@@ -3,6 +3,7 @@ package interfaces;
 import org.openqa.selenium.WebDriver;
 
 import common.Constant;
+import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends BasePage{
    /* static final By txtEmailAddress = By.xpath("//input[@name='emailaddress']");
@@ -49,8 +50,13 @@ public class LoginPage extends BasePage{
     	System.out.println(a.toString());
     	waitForElementDisplayed(getControl("lblErorMsg"),true, DEFAULT_TIMEOUT );
     	String b = getText(getControl("lblErorMsg"));   
-    	return b;        
+    	return b;  
+        
     }
-  
+  public <T> T openFooter(String footerName, Class<T> returnPage)
+  {
+      System.err.println("return correct page "+ footerName);
+      return PageFactory.initElements(driver, returnPage);
+  }
 
 }
