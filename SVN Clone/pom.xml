@@ -45,11 +45,9 @@
         <dependency>
             <groupId>com.relevantcodes</groupId>
             <artifactId>extentreports</artifactId>
-            <version>2.04</version>
-            <scope>test</scope>
-            <type>jar</type>
-        </dependency>
-                    
+            <version>2.41.2</version>
+         </dependency>
+               
         <!-- to modify TestNG Report -->
         <dependency>
             <groupId>org.uncommons</groupId>
@@ -75,6 +73,7 @@
             <classifier>no_aop</classifier>
             <scope>test</scope>
         </dependency>
+      
         <!-- end to modify TestNG Report -->
     
     </dependencies>
