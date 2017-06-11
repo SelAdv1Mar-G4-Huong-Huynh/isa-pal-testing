@@ -35,6 +35,6 @@ public class HomePage extends BasePage {
     	return new FreeWebSitePage();
     }
     public void testok(){
-        System.out.println("fđfd test ok");
+        System.out.println("fdfd test ok");
     }
 }

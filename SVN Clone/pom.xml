@@ -70,12 +70,18 @@
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
             <version>4.1.0</version>
-            <classifier>no_aop</classifier>
             <scope>test</scope>
+            <type>jar</type>
         </dependency>
       
         <!-- end to modify TestNG Report -->
-    
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <build>
         <plugins>           
@@ -102,7 +108,7 @@
                     </property>
                     </properties>
                      <workingDirectory>target/</workingDirectory>
-                    <!-- end odify TestNG Report-->
+                    <!-- end modify TestNG Report-->
                     <suiteXmlFiles>
                       <!-- <suiteXmlFile>firefoxSuite.xml</suiteXmlFile> -->
                         <suiteXmlFile>testng.xml</suiteXmlFile>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Page name="Skynova.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="BasePageXML.xsd">
-	<PageItem name="lnkLoginTab" by="XPath">//a[contains(@href,'login.php')]</PageItem>
+	<PageItem name="lnkLoginTab" by="XPath">//a[contains(@href,'ffflogin.phpx')]</PageItem>
 	<PageItem name="lnkSignUpTab" by="XPath">//a[contains(@href,'signup.php')]</PageItem>
 	<PageItem name="lnkFreeWebSiteTab" by="XPath">//a[contains(@href,'signup.php')]</PageItem>
 </Page>

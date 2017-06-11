@@ -8,6 +8,8 @@ import interfaces.EditWebsitePage;
 import interfaces.HomePage;
 import interfaces.LoginPage;
 import org.openqa.selenium.support.PageFactory;
+import utils.IWebDriver;
+import static utils.IWebDriver.assertTrue;
 
 
 public class LoginTestCases extends BaseTestCase{
@@ -31,6 +33,7 @@ public class LoginTestCases extends BaseTestCase{
      // String expectedMsg = "Incorrectly formatted e-mail address. \"@\"-sign missing"; 
       String expectedMsg = "Incorrect e-mail address. Please check the spelling of your e-mail address and try again.";
       System.out.println(expectedMsg);
+     assertTrue(loginPage.waitForPageTitleContains("Yahoo Mail", loginPage.getExplicitlyWaitSecond()), "Verify yahoo mailbox is navigated");
       Assert.assertTrue(actualMsg.contains(expectedMsg));
       Assert.assertFalse(true,"Failed feojoreij");
   }
@@ -81,10 +84,16 @@ public class LoginTestCases extends BaseTestCase{
       // EditWebsitePage editPage = loginPage.Login(Constant.UserName, Constant.Password);      
      
      HomePage hp = loginPage.openFooter("Home Page", HomePage.class );
-     hp.testok();
+     homePage.isElementExists(homePage.getControl("lnkLoginTab"));
+   
      
-     EditWebsitePage ed = loginPage.openFooter("Edit PAge", EditWebsitePage.class );
-     ed.aaOK();
+   }
+   @Test  
+   public void LoginTC06(){
+ 	  System.out.println("TC06 - Update user profile.");
+      
+     homePage.isElementExists(homePage.getControl("lnkLoginTab"));
+     
      
    }
     @Test  

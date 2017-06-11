@@ -72,7 +72,6 @@ public abstract class BaseTestCase {
         // Close browser
         if (ITestResult.FAILURE == iResult.getStatus()) {
            String path = captureScreenshot(driver);
-           logger.info("Please refer the screenshot at " + path + " for detail");
           // logger.log(LogStatus.FAIL, screenshotPath);
         }
         /*report.endTest(logger);

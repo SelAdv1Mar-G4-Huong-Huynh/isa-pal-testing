@@ -42,3 +42,4 @@ public class test {
         System.out.println("After test-method. Thread id is: " + id);
     }
 }
+//http://robertjliguori.blogspot.com/2016/11/tesseract-optical-character-recognition.html

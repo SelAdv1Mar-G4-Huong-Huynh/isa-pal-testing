@@ -1,5 +1,6 @@
 package utils;
 
+import com.google.common.base.Stopwatch;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,8 +19,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.Reporter;
+import org.testng.annotations.Listeners;
 import org.testng.log4testng.Logger;
 
+@Listeners({CustomTestListener.class})
 public abstract class IWebDriver{
 	public WebDriver driver;
 	private EventFiringWebDriver eventDriver;
@@ -27,7 +31,7 @@ public abstract class IWebDriver{
 	
 	private Logger log =Logger.getLogger(IWebDriver.class);
 	private static Map<ITestResult, List<Throwable>> verificationFailuresMap = new HashMap<ITestResult, List<Throwable>>();
-	public static long DEFAULT_TIMEOUT = 10;
+	public static long DEFAULT_TIMEOUT = 3;
 	
 	public IWebDriver(WebDriver wdriver){
 		setUp(wdriver);
@@ -46,6 +50,46 @@ public abstract class IWebDriver{
 	public WebDriver getDriver(){
 		return this.driver;
 	}
+        /**
+         * to handle stale element exception and null exception and wait the element exist
+         * @param by locator
+         * @param int time out ()
+         * @return WebElement
+         */
+        private WebElement findElement(By locator, long timeout){
+          WebElement iElement = null;
+            int waitSecond= 0;
+            while (timeout >= 0)
+            {
+                 Stopwatch stopwatch =Stopwatch.createStarted();
+                 //stopwatch.start();
+                try
+                {
+                    WebDriverWait wait = new WebDriverWait(driver, timeout);
+                    wait.until(ExpectedConditions.elementToBeClickable(locator));
+                    iElement=eventDriver.findElement(locator);
+                    break;
+                }
+                catch(StaleElementReferenceException ex){
+                    waitSecond = (int) stopwatch.elapsed(TimeUnit.SECONDS);
+                     findElement(locator, timeout-waitSecond);
+                }
+                catch (NullPointerException ex)
+                {
+                    waitSecond = (int)stopwatch.elapsed(TimeUnit.SECONDS);
+                     findElement(locator, timeout-waitSecond);
+                }
+                catch (WebDriverException ex)
+                {
+                   waitSecond = (int)stopwatch.elapsed(TimeUnit.SECONDS);
+                   findElement(locator, timeout-waitSecond);
+                }   
+                timeout = timeout-waitSecond;
+                stopwatch.stop();
+            }         
+            return iElement;
+        }
+        
 	/*********************************************************
 	 * Set/Get ExplicitlyWaitSecond
 	 *********************************************************/
@@ -131,11 +175,12 @@ public abstract class IWebDriver{
 	 * @return true if element is exists
 	 *********************************************************/
 	public boolean isElementExists(By locator) {
-		if (driver.findElement(locator)!= null) {
-			log.trace("Element found: " + locator.toString() + "(" + eventDriver.findElements(locator).size() + ")");
+                WebElement element = findElement(locator, DEFAULT_TIMEOUT);
+		if (element != null) {
+			log.trace("Element found: " + locator.toString() );
 			return true;
 		} else {
-			log.trace("No element found: " + locator.toString());
+			log.info("No element found: " + locator.toString());
 			return false;	
 		}
 	}
@@ -152,7 +197,7 @@ public abstract class IWebDriver{
 	 * @return true if element exists and display on screen
 	 *********************************************************/
 	public boolean isDisplayed(By locator) {
-		boolean flag = isElementExists(locator) ? eventDriver.findElement(locator).isDisplayed() : false;
+		boolean flag = findElement(locator, DEFAULT_TIMEOUT).isDisplayed()?true : false;
 		log.trace("Element " + locator.toString() + ". IsDisplayed() status found: " + flag);
 		return flag;
 	}
@@ -169,7 +214,7 @@ public abstract class IWebDriver{
 	 * @return true if element is enabled
 	 *********************************************************/
 	public boolean isEnabled(By locator) {
-		boolean flag = isElementExists(locator) ? eventDriver.findElement(locator).isEnabled() : false;
+		boolean flag = findElement(locator, DEFAULT_TIMEOUT).isEnabled() ? true: false;
 		log.trace("Element " + locator.toString() + ". IsEnabled() status found: " + flag);
 		return flag;
 	}
@@ -186,7 +231,7 @@ public abstract class IWebDriver{
 	 * @return true if element is selected
 	 *********************************************************/
 	public boolean isSelected(By locator) {
-		boolean flag = isElementExists(locator) ? eventDriver.findElement(locator).isSelected() : false;
+		boolean flag = findElement(locator, DEFAULT_TIMEOUT).isSelected()? true : false;
 		log.trace("Element " + locator.toString() + ". IsSelected() status found: " + flag);
 		return flag;
 	}
@@ -203,7 +248,7 @@ public abstract class IWebDriver{
 	 * @overrideparam - the target web element
 	 *********************************************************/
 	public boolean check(By locator, boolean checked) {
-		boolean flag = isElementExists(locator) ? check(eventDriver.findElement(locator), checked) : false;
+		boolean flag = check(findElement(locator, DEFAULT_TIMEOUT), checked)?true : false;
 		log.debug("Performed check action on element " + locator.toString() + ". IsSelected() status now becomes: "  + flag);
 		return flag;
 	}
@@ -230,10 +275,14 @@ public abstract class IWebDriver{
 	}
 
 	public void click(By locator) {
-		if (isElementExists(locator)) {
-			eventDriver.findElement(locator).click();
-			log.debug("Performed click action on element " + locator.toString());
-		}
+            WebElement element = findElement(locator, DEFAULT_TIMEOUT);
+           try{
+                element.click();
+                log.info("Performed click action on element " + locator.toString(),new Throwable());
+           }catch(Exception ex){
+               log.error("Element not found" + locator.toString() +ex.toString());
+           }
+            
 	}
 
 	/*********************************************************
@@ -244,9 +293,9 @@ public abstract class IWebDriver{
 	 * @return value of the attribute
 	 *********************************************************/
 	public String getAttribute(By locator, String attribute) {
-		String text = driver.findElement(locator).getAttribute(attribute);
+		String text = findElement(locator, DEFAULT_TIMEOUT).getAttribute(attribute);
 		System.out.println(text);
-		return (isElementExists(locator)) ? driver.findElement(locator).getAttribute(attribute) : null;
+		return (isElementExists(locator)) ? findElement(locator, DEFAULT_TIMEOUT).getAttribute(attribute) : null;
 	}
 
 	public String getAttribute(String locator, String attribute) {
@@ -261,7 +310,7 @@ public abstract class IWebDriver{
 	 * @return css value
 	 *********************************************************/
 	public String getCssValue(By locator, String property) {
-		return (isElementExists(locator)) ? eventDriver.findElement(locator).getCssValue(property) : null;
+		return (isElementExists(locator)) ? findElement(locator, DEFAULT_TIMEOUT).getCssValue(property) : null;
 	}
 
 	public String getCssValue(String locator, String property) {
@@ -270,8 +319,7 @@ public abstract class IWebDriver{
 
 	/*********************************************************
 	 * get element count
-	 * 
-	 * @param - By: locator of element
+         * @param locator
 	 * @overrideparam - the xpath of element
 	 * @return number of elements
 	 *********************************************************/
@@ -291,7 +339,7 @@ public abstract class IWebDriver{
 	 * @return web elements
 	 *********************************************************/
 	public WebElement getElement(By locator) {
-		return eventDriver.findElement(locator);
+		return findElement(locator, DEFAULT_TIMEOUT);
 	}
 
 	public WebElement getElement(String locator) {
@@ -325,7 +373,7 @@ public abstract class IWebDriver{
 	 * @return - the selected text
 	 *********************************************************/
 	public String getSelectedText(By locator) {
-		return (isElementExists(locator)) ? getSelectedText(eventDriver.findElement(locator)) : null;
+		return (isElementExists(locator)) ? getSelectedText(findElement(locator, DEFAULT_TIMEOUT)) : null;
 	}
 
 	public String getSelectedText(String xpath) {
@@ -345,7 +393,7 @@ public abstract class IWebDriver{
 	 * @return - text value of an element
 	 *********************************************************/
 	public String getText(By locator) {
-		return (isElementExists(locator)) ? eventDriver.findElement(locator).getText() : null;
+		return (isElementExists(locator)) ? findElement(locator, DEFAULT_TIMEOUT).getText() : null;
 	}
 
 	public String getText(String locator) {
@@ -362,7 +410,7 @@ public abstract class IWebDriver{
 	public void select(By locator, String value) {
 		if (value != null && isElementExists(locator))
 			try {
-				select(eventDriver.findElement(locator), value);
+				select(findElement(locator, DEFAULT_TIMEOUT), value);
 				log.debug("Seleted value of element" + locator.toString() + "now becomes: " + value);
 			} catch (StaleElementReferenceException e) {
 				log.debug("Cannot select value-" + e);
@@ -388,7 +436,7 @@ public abstract class IWebDriver{
 	 *********************************************************/
 	public void type(By locator, String text) {
 		if (isElementExists(locator))
-			type(eventDriver.findElement(locator), text);
+			type(findElement(locator, DEFAULT_TIMEOUT), text);
 	}
 
 	public void type(String locator, String text) {
@@ -411,7 +459,7 @@ public abstract class IWebDriver{
 	 *********************************************************/
 	public void type(By locator, Keys keys) {
 		if (isElementExists(locator))
-			eventDriver.findElement(locator).sendKeys(keys);
+			findElement(locator, DEFAULT_TIMEOUT).sendKeys(keys);
 	}
 
 	public void type(String locator, Keys keys) {
