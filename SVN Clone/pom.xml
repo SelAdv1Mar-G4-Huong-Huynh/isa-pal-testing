@@ -18,16 +18,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <testng.version>6.9.8</testng.version>
         <selenium.version>2.45.0</selenium.version>
-        <testng.surefire.version>2.19.1</testng.surefire.version>
+        <testng.surefire.version>2.18</testng.surefire.version> <!--2.19.1-->
         <jdk.version>8</jdk.version>
     </properties>
-  <!--  <properties>
-		<selenium.version>2.45.0</selenium.version>
-		<testng.version>6.3.1</testng.version>
-		<testng.surefire.version>2.17</testng.surefire.version>
-		<spring.version>4.0.6.RELEASE</spring.version>
-		<jdk.version>7</jdk.version>
-	</properties>-->
+    <!--<properties>
+        <selenium.version>2.45.0</selenium.version>
+        <testng.version>6.3.1</testng.version>
+        <testng.surefire.version>2.17</testng.surefire.version>
+        <spring.version>4.0.6.RELEASE</spring.version>
+        <jdk.version>8</jdk.version>
+    </properties> -->
 
     <dependencies>
         <dependency>
@@ -41,13 +41,17 @@
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
         </dependency> 
-        
+       <!-- pom.xml Version 2.x  -->
         <dependency>
             <groupId>com.relevantcodes</groupId>
             <artifactId>extentreports</artifactId>
             <version>2.41.2</version>
-         </dependency>
-               
+        </dependency> 
+        <dependency>
+    <groupId>com.aventstack</groupId>
+    <artifactId>extentreports</artifactId>
+    <version>3.0.6</version>
+</dependency>      
         <!-- to modify TestNG Report -->
         <dependency>
             <groupId>org.uncommons</groupId>
@@ -73,7 +77,18 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
-      
+        <!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.26-incubating</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mongodb/bson -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>bson</artifactId>
+            <version>3.4.2</version>
+        </dependency>
         <!-- end to modify TestNG Report -->
         <dependency>
             <groupId>junit</groupId>
@@ -96,21 +111,25 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${testng.surefire.version}</version>
                 <configuration>
-                     <!-- to modify TestNG Report -->
+                    <!-- to modify TestNG Report -->
                     <properties>
-                    <property>
-                        <name>usedefaultlisteners</name>
-                        <value>false</value>
-                    </property>
-                    <property>
-                        <name>listener</name>
-                        <value>org.uncommons.reportng.HTMLReporter, org.uncommons.reportng.JUnitXMLReporter</value>
-                    </property>
+                        <property>
+                            <name>usedefaultlisteners</name>
+                            <value>false</value>
+                        </property>
+                        <property>
+                            <name>listener</name>
+                            <value>org.uncommons.reportng.HTMLReporter, org.uncommons.reportng.JUnitXMLReporter</value>
+                        </property>
+                        <property>
+                            <name>reporter</name>
+                            <value>listenReport.Reporter</value>
+                        </property>
                     </properties>
-                     <workingDirectory>target/</workingDirectory>
+                    <workingDirectory>target/</workingDirectory>
                     <!-- end modify TestNG Report-->
                     <suiteXmlFiles>
-                      <!-- <suiteXmlFile>firefoxSuite.xml</suiteXmlFile> -->
+                        <!-- <suiteXmlFile>firefoxSuite.xml</suiteXmlFile> -->
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>

@@ -29,6 +29,7 @@ public abstract class IWebDriver{
 	private long implicitlyWaitSecond;
 	private long explicitlyWaitSecond;
 	
+        
 	private Logger log =Logger.getLogger(IWebDriver.class);
 	private static Map<ITestResult, List<Throwable>> verificationFailuresMap = new HashMap<ITestResult, List<Throwable>>();
 	public static long DEFAULT_TIMEOUT = 3;

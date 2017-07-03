@@ -5,9 +5,11 @@
  */
 package utils;
 
+import com.relevantcodes.extentreports.DisplayOrder;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import java.io.File;
 import java.util.List;
 import org.testng.IReporter;
 import org.testng.IResultMap;
@@ -15,6 +17,10 @@ import org.testng.ISuite;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 import org.testng.xml.XmlSuite;
+import java.util.Map;
+import org.openqa.selenium.WebDriver;
+import org.testng.ISuiteResult;
+import org.testng.ITestContext;
 
 /**
  *
@@ -36,11 +42,11 @@ public class ExtentReportNG extends TestListenerAdapter implements IReporter {
         return test;
     }
  
-    
     public void generateReport(List<XmlSuite> list, List<ISuite> list1, String outputDirectory) {
-        /*   DisplayOrder NetworkMode = null;
-        extent = new ExtentReports(outputDirectory + File.separator + "Extent.htlm",true,NetworkMode.OFFLINE,Locale.ENGLISH);
-        for(ISuite suite:suites)
+        DisplayOrder NetworkMode = null;
+        extent = new ExtentReports(outputDirectory + File.separator + "Extent.html",true);
+        //extent = new ExtentReports(outputDirectory + File.separator + "Extent.htlm",true,NetworkMode),Locale.ENGLISH);
+        for(ISuite suite:list1)
         {
             Map<String,ISuiteResult> result = suite.getResults();
             for(ISuiteResult r:result.values()){
@@ -50,7 +56,7 @@ public class ExtentReportNG extends TestListenerAdapter implements IReporter {
                 buildTestNode(context.getFailedTests(),LogStatus.PASS);
             }
             extent.flush();
-        }*/
+        }
     }
     private void buildTestNode(IResultMap tests,LogStatus status)
     {
@@ -66,20 +72,19 @@ public class ExtentReportNG extends TestListenerAdapter implements IReporter {
                 }
                 test.log(status,message);
                 if(status.equals(LogStatus.FAIL)){
-                    test.log(LogStatus.INFO, "Sceen shot of failed test:"+ test.addScreenCapture(methodName+"screenshot.png"));
+                    test.log(LogStatus.INFO, "Screenshot of failed test:"+ test.addScreenCapture(methodName+"screenshot.png"));
                 }
                 extent.endTest(test);
             }
         }
     }
     public void onTestStart(ITestResult testResult){
-        //To Do
+        test.log(LogStatus.PASS, testResult.getTestName() + " Test Case Success and Title Verified");
     }
     public void onTestSuccess(ITestResult testResult){
-        // To do
+         test.log(LogStatus.PASS, testResult.getTestName() + " Test Case Success and Title Verified");
     }
     public void onTestFailuer(ITestResult testResult){
-      //  WebDriver diver = WebDriverManager.getDriverInstance();
-        //hjhkjh
+    
     }
 }

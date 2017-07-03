@@ -1,8 +1,12 @@
 package testcases;
 
-import com.relevantcodes.extentreports.ExtentReports;
+/*import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
+import com.relevantcodes.extentreports.LogStatus;*/
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+
 import static common.ActionCommon.captureScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,13 +16,14 @@ import interfaces.EditWebsitePage;
 import interfaces.HomePage;
 import org.testng.ITestResult;
 import org.uncommons.reportng.HTMLReporter;
+import utils.ExtentReportNG1;
 
-public abstract class BaseTestCase {
+public abstract class BaseTestCasexx {
 
-    public ExtentReports report;
-    public ExtentTest extent;
-//    public HTMLReporter htmlReport;
-   
+    ExtentReports report;
+    ExtentTest extent;
+    HTMLReporter htmlReport;
+    ExtentHtmlReporter htmlReporter;
     //Logger logger;
     public WebDriver driver;
     public HomePage homePage;
@@ -26,14 +31,13 @@ public abstract class BaseTestCase {
    
     @BeforeTest
     public void TestInitalizeTest()
-    {
-        String extentReportPath = System.getProperty("user.dir") + "\\surefire-reports\\extentreports.html";
-        System.out.println(extentReportPath);
-        report = new ExtentReports(extentReportPath);
+    { 
+        report = ExtentReportNG1.GetExtent();
     }
    
-    @BeforeMethod
+   @BeforeMethod
     public void TestInitializeMethod() {
+        
         System.out.println("Run Test Initialize");
         // Start Firefox browser and maximize window
       //  logger = Logger.getLogger(BaseTestCase.class);
@@ -53,37 +57,31 @@ public abstract class BaseTestCase {
     @AfterMethod
     public void TestCleanupMethod(ITestResult iResult) {
         System.out.println("Run Test Cleanup");
-        // Close browser
-       
-        /* if (ITestResult.FAILURE == iResult.getStatus()) {
-           path = captureScreenshot(driver,iResult.getName());
-          // logger.log(LogStatus.FAIL, screenshotPath);
-        }*/
-        extent = report.startTest(iResult.getName());
+        System.out.println("Please refer test report at: "+ ExtentReportNG1.getFilePath());
+        
+        extent = report.createTest(iResult.getName(), "Verify HomePage");
         try {
             switch (iResult.getStatus()) {
                 case ITestResult.FAILURE:                    
                     String image = captureScreenshot(driver, iResult.getName());
                     System.out.println(image);
-                    String TestCaseName = this.getClass().getSimpleName() + " Test Case Failure and Title/Boolean Value Failed";
-                    extent.log(LogStatus.FAIL, TestCaseName + ". Please refer screenshot"+image);
-                    extent.addScreencast(image);
+                    extent.fail("Test Case Failed" +this.getClass().getSimpleName() +"_"+ iResult.getName());
+                    extent.addScreenCaptureFromPath(image);
                     break;
                 case ITestResult.SUCCESS:
-                    extent.log(LogStatus.PASS, this.getClass().getSimpleName() + " Test Case Success and Title Verified");
+                    extent.pass( this.getClass().getSimpleName() +"_"+iResult.getName() + " Test Case Success and Title Verified");
                     break;
                 case ITestResult.SKIP:
-                    extent.log(LogStatus.SKIP, this.getClass().getSimpleName() + " Test Case Skipped");
+                    extent.skip(this.getClass().getSimpleName() +"_"+ iResult.getName() + " Test Case Skipped");
                     break;
                 default:
                     break;
             }
         } catch (Throwable t) {
-            extent.log(LogStatus.ERROR, t.getMessage());
+            extent.error(t.getMessage());
         }
-        report.endTest(extent);
+        //report.removeTest(extent);
         report.flush();
         driver.quit();
     }
-
 }

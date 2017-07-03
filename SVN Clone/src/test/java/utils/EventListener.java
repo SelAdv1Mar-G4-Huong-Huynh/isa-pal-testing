@@ -18,6 +18,7 @@ public class EventListener extends AbstractWebDriverEventListener {
 		public void onException(Throwable throwable, WebDriver driver) {
 			File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			try {
+                            System.out.println("file is "+ file.getPath());
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 				FileUtils.copyFile(file, new File("src/test/target/" + dateFormat.format(new Date()) + ".jpg"));
 			} catch (IOException e) {

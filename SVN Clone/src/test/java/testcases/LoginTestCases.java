@@ -12,7 +12,7 @@ import utils.IWebDriver;
 import static utils.IWebDriver.assertTrue;
 
 
-public class LoginTestCases extends BaseTestCase{
+public class LoginTestCases extends BaseTestCasexx{
 
 	/************************************************
 	 * Testcase 01: TC01 - User can log into Twitter with invalid username and password.
@@ -85,13 +85,11 @@ public class LoginTestCases extends BaseTestCase{
      
      HomePage hp = loginPage.openFooter("Home Page", HomePage.class );
      homePage.isElementExists(homePage.getControl("lnkLoginTab"));
-   
-     
    }
-   @Test  
+ //  @Test  
    public void LoginTC06(){
  	  System.out.println("TC06 - Update user profile.");
-      
+    
      homePage.isElementExists(homePage.getControl("lnkLoginTab"));
      
      
