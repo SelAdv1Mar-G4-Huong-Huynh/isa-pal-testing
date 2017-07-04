@@ -24,7 +24,7 @@ public class LoginTestCases extends BaseTestCasexx{
 	 * VP Verify that message "Incorrect e-mail address. Please check the spelling of your e-mail address and try again.."
 	 * 
 	 ************************************************/
- // @Test
+ @Test
   public void LoginTC01(){
 	  System.out.println("TC01 - User can log into Twitter with invalid username and password.");
       LoginPage loginPage = homePage.goToLoginPage();     
@@ -86,7 +86,7 @@ public class LoginTestCases extends BaseTestCasexx{
      HomePage hp = loginPage.openFooter("Home Page", HomePage.class );
      homePage.isElementExists(homePage.getControl("lnkLoginTab"));
    }
- //  @Test  
+  @Test  
    public void LoginTC06(){
  	  System.out.println("TC06 - Update user profile.");
     

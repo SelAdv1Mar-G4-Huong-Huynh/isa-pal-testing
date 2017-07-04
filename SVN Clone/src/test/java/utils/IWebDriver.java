@@ -22,6 +22,7 @@ import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import org.testng.log4testng.Logger;
 
+
 @Listeners({CustomTestListener.class})
 public abstract class IWebDriver{
 	public WebDriver driver;
@@ -31,11 +32,13 @@ public abstract class IWebDriver{
 	
         
 	private Logger log =Logger.getLogger(IWebDriver.class);
+        
 	private static Map<ITestResult, List<Throwable>> verificationFailuresMap = new HashMap<ITestResult, List<Throwable>>();
 	public static long DEFAULT_TIMEOUT = 3;
 	
 	public IWebDriver(WebDriver wdriver){
 		setUp(wdriver);
+                ;
 	}
 	
 	/*********************************************************
@@ -113,7 +116,7 @@ public abstract class IWebDriver{
 		implicitlyWaitSecond = second;
 		try {
 			driver.manage().timeouts().implicitlyWait(implicitlyWaitSecond, TimeUnit.SECONDS);
-			log.trace("ImplicitlyWait set to " + implicitlyWaitSecond);
+			//log.trace("ImplicitlyWait set to " + implicitlyWaitSecond);
 		} catch (Throwable t) {
 			log.error("Driver is null.", t);
 		}
@@ -157,7 +160,7 @@ public abstract class IWebDriver{
 	public void close() {
 		eventDriver.close();
 		eventDriver.quit();
-		log.trace("Closed " + driver.toString());
+		//log.trace("Closed " + driver.toString());
 	}
 
 	/*********************************************************
@@ -178,7 +181,7 @@ public abstract class IWebDriver{
 	public boolean isElementExists(By locator) {
                 WebElement element = findElement(locator, DEFAULT_TIMEOUT);
 		if (element != null) {
-			log.trace("Element found: " + locator.toString() );
+			//log.trace("Element found: " + locator.toString() );
 			return true;
 		} else {
 			log.info("No element found: " + locator.toString());
@@ -199,7 +202,7 @@ public abstract class IWebDriver{
 	 *********************************************************/
 	public boolean isDisplayed(By locator) {
 		boolean flag = findElement(locator, DEFAULT_TIMEOUT).isDisplayed()?true : false;
-		log.trace("Element " + locator.toString() + ". IsDisplayed() status found: " + flag);
+		//log.trace("Element " + locator.toString() + ". IsDisplayed() status found: " + flag);
 		return flag;
 	}
 
@@ -216,7 +219,7 @@ public abstract class IWebDriver{
 	 *********************************************************/
 	public boolean isEnabled(By locator) {
 		boolean flag = findElement(locator, DEFAULT_TIMEOUT).isEnabled() ? true: false;
-		log.trace("Element " + locator.toString() + ". IsEnabled() status found: " + flag);
+		//log.trace("Element " + locator.toString() + ". IsEnabled() status found: " + flag);
 		return flag;
 	}
 
@@ -233,7 +236,7 @@ public abstract class IWebDriver{
 	 *********************************************************/
 	public boolean isSelected(By locator) {
 		boolean flag = findElement(locator, DEFAULT_TIMEOUT).isSelected()? true : false;
-		log.trace("Element " + locator.toString() + ". IsSelected() status found: " + flag);
+		//log.trace("Element " + locator.toString() + ". IsSelected() status found: " + flag);
 		return flag;
 	}
 
@@ -569,7 +572,7 @@ public abstract class IWebDriver{
 	 * @param - wait time in seconds
 	 *********************************************************/
 	public boolean waitForPageTitle(String title, long second) {
-		log.trace("Wait for page title become '" + title.toString() + "' for " + second + "seconds");
+		//log.trace("Wait for page title become '" + title.toString() + "' for " + second + "seconds");
 		long end = System.currentTimeMillis() + second * 1000;
 		while (System.currentTimeMillis() < end) {
 			if (getPageTitle().contentEquals(title))
@@ -585,7 +588,7 @@ public abstract class IWebDriver{
 	 * @param - wait time in seconds
 	 *********************************************************/
 	public boolean waitForPageTitleContains(String subTitle, long second) {
-		log.trace("Wait for page title contains '" + subTitle.toString() + "' for " + second + "seconds");
+		//log.trace("Wait for page title contains '" + subTitle.toString() + "' for " + second + "seconds");
 		long end = System.currentTimeMillis() + second * 1000;
 		while (System.currentTimeMillis() < end) {
 			if (getPageTitle().contains(subTitle))
