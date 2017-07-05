@@ -1,0 +1,64 @@
+ <PageItem name="tblHeader" by="CSS">table.logoRowColor</PageItem>
+  <PageItem name="imgLogo" by="CSS">table.logoRowColor img</PageItem>
+  <PageItem name="divMiddleContent" by="CSS">div.contentAreaRL</PageItem>
+  <PageItem name="divMiddleContentTitle" by="CSS">div.contentAreaRL > div</PageItem>
+  <PageItem name="spanTradeMark" by="CSS">#spTM</PageItem>
+  <PageItem name="spanTitle" by="CSS">#spTitle</PageItem>
+
+  <!--Make sure the first white horizontal line is the next element of the title text "Renaissance Place"-->
+  <PageItem name="hrFirstWhiteHorizontalLine" by="CSS">div.contentAreaRL > div + hr</PageItem>
+
+  <!--Make sure the login options is the next element of the first white horizontal line-->
+  <PageItem name="tblLoginOptionsTable" by="CSS">div.contentAreaRL hr.whiteLineTop + .btnTable</PageItem>
+
+  <!--Make sure the second white horizontal line is the next element of the login options-->
+  <PageItem name="hrSecondWhiteHorizontalLine" by="CSS">div.contentAreaRL .btnTable + hr</PageItem>
+
+  <!--Make sure the check software requirements button is the next element of second horizontal line-->
+  <PageItem name="btnCheckSoftwareRequirements" by="XPATH">//hr[@class='whiteLineBot']/following-sibling::div[1]//a</PageItem>
+
+  <PageItem name="btnLogInSudent" by="CSS">#btnLogInS</PageItem>
+  <PageItem name="btnLogInTeacher" by="CSS">#btnLogInT</PageItem>
+  <PageItem name="btnLogInParent" by="CSS">#btnLogInP</PageItem>
+
+  <!--new region-->
+  <PageItem name="Page Title" by="CSS">#spTitle</PageItem>
+  <PageItem name="Check Software Requirements button" by="XPATH">//hr[@class='whiteLineBot']/following-sibling::div[1]//a</PageItem>
+  <PageItem name="I'm a Student button" by="CSS">#btnLogInS</PageItem>
+  <PageItem name="I'm a Teacher/Administrator button" by="CSS">#btnLogInT</PageItem>
+  <PageItem name="I'm a Parent button" by="CSS">#btnLogInP</PageItem>
+  <PageItem name="RPID label" by="ID">divRPID</PageItem>
+  <PageItem name="RPID">//div[@id='RPIDSection']</PageItem>
+  <PageItem name="Copyright Information">//td[@class='copyrightText']</PageItem>
+ <PageItem name="tblHeader" by="CSS">table.logoRowColor</PageItem>
+  <PageItem name="imgLogo" by="CSS">table.logoRowColor img</PageItem>
+  <PageItem name="divMiddleContent" by="CSS">div.contentAreaRL</PageItem>
+  <PageItem name="divMiddleContentTitle" by="CSS">div.contentAreaRL > div</PageItem>
+  <PageItem name="spanTradeMark" by="CSS">#spTM</PageItem>
+  <PageItem name="spanTitle" by="CSS">#spTitle</PageItem>
+
+  <!--Make sure the first white horizontal line is the next element of the title text "Renaissance Place"-->
+  <PageItem name="hrFirstWhiteHorizontalLine" by="CSS">div.contentAreaRL > div + hr</PageItem>
+
+  <!--Make sure the login options is the next element of the first white horizontal line-->
+  <PageItem name="tblLoginOptionsTable" by="CSS">div.contentAreaRL hr.whiteLineTop + .btnTable</PageItem>
+
+  <!--Make sure the second white horizontal line is the next element of the login options-->
+  <PageItem name="hrSecondWhiteHorizontalLine" by="CSS">div.contentAreaRL .btnTable + hr</PageItem>
+
+  <!--Make sure the check software requirements button is the next element of second horizontal line-->
+  <PageItem name="btnCheckSoftwareRequirements" by="XPATH">//hr[@class='whiteLineBot']/following-sibling::div[1]//a</PageItem>
+
+  <PageItem name="btnLogInSudent" by="CSS">#btnLogInS</PageItem>
+  <PageItem name="btnLogInTeacher" by="CSS">#btnLogInT</PageItem>
+  <PageItem name="btnLogInParent" by="CSS">#btnLogInP</PageItem>
+
+  <!--new region-->
+  <PageItem name="Page Title" by="CSS">#spTitle</PageItem>
+  <PageItem name="Check Software Requirements button" by="XPATH">//hr[@class='whiteLineBot']/following-sibling::div[1]//a</PageItem>
+  <PageItem name="I'm a Student button" by="CSS">#btnLogInS</PageItem>
+  <PageItem name="I'm a Teacher/Administrator button" by="CSS">#btnLogInT</PageItem>
+  <PageItem name="I'm a Parent button" by="CSS">#btnLogInP</PageItem>
+  <PageItem name="RPID label" by="ID">divRPID</PageItem>
+  <PageItem name="RPID">//div[@id='RPIDSection']</PageItem>
+  <PageItem name="Copyright Information">//td[@class='copyrightText']</PageItem>
