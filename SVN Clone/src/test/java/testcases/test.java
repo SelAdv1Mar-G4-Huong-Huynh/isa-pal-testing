@@ -87,10 +87,10 @@ public class test {
     public boolean isListSorted(List<String> list, String order){
          return Ordering.natural().isOrdered(list);
     }
-   public boolean isWithinRange(Date testDate) {
+  /* public boolean isWithinRange(Date testDate) {
     return testDate.getTime() >= startDate.getTime() &&
              testDate.getTime() <= endDate.getTime();
-}
+}*/
         public void encode8uf()
         {
              System.out.println("BEfore method");
