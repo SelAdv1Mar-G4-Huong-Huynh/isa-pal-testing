@@ -62,3 +62,38 @@
   <PageItem name="RPID label" by="ID">divRPID</PageItem>
   <PageItem name="RPID">//div[@id='RPIDSection']</PageItem>
   <PageItem name="Copyright Information">//td[@class='copyrightText']</PageItem>
+
+  <PageItem name="Reading tab" by="XPath">(//table[contains(@id,'SubjectLinks')]//tr/td/a)[1]</PageItem>
+  <PageItem name="Accelerated Reader tab" by="XPath">//img[@src='../../Images/hc2tabAR.png']</PageItem>
+  <PageItem name="Math tab" by="XPath">//img[contains(@src,'tabMath')]</PageItem>
+
+  <!--Accelerated Reader tab-->
+  <PageItem name="Reading Practice Quizzes link" by="XPath">(//table[contains(@id,'AppSubLinks')]//tr/td/a)[1]</PageItem>
+  <PageItem name="Click to Open in New Window link" by="XPath">//a[contains(@id,'PopupWindowLink')]</PageItem>
+  <PageItem name="My Overall Progress label">//span[@class='boxHeaderTitle']</PageItem>
+  <PageItem name="Vocabulary Practice Quizzes link">//table[contains(@class,'Menu_AppSubLinks')]/tbody/tr/td/a[contains(@href,'ARVocabPractice')]</PageItem>
+  <PageItem name="View My Bookshelf link">//a[contains(@id,'ViewBookShelf')]</PageItem>
+
+<PageItem name="Return to Home link">//a[contains(@id,'Header_mTaskList')]</PageItem>
+
+  <!--Classroom Preferences-->
+  <PageItem name="School combobox">//select[contains(@id,'mClassListControl_mDropDownList_School')]</PageItem>
+  <PageItem name="Class combobox">//select[@id='mClassListControl_mDropDownList_Class']</PageItem>
+  <PageItem name="Mandatory Practice link">//table[@class='tableSetting']//tr[contains(@id,'trClassPrefs')][1]/td[1]/a</PageItem>
+  <PageItem name="Monitor Password link">//table[@class='tableSetting']//tr[contains(@id,'trClassPrefs')][2]/td[1]/a</PageItem>
+  <PageItem name="Problem Format link">//table[@class='tableSetting']//tr[contains(@id,'trClassPrefs')][3]/td[1]/a</PageItem>
+  <PageItem name="Question Type link">//table[@class='tableSetting']//tr[contains(@id,'trClassPrefs')][4]/td[1]/a</PageItem>
+  <PageItem name="Time Goals link">//table[@class='tableSetting']//tr[contains(@id,'trClassPrefs')][5]/td[1]/a</PageItem>
+  <PageItem name="Time-Out link">//table[@class='tableSetting']//tr[contains(@id,'trClassPrefs')][6]/td[1]/a</PageItem>
+  <PageItem name="TOPS Report link">//table[@class='tableSetting']//tr[contains(@id,'trClassPrefs')][7]/td[1]/a</PageItem>
+  <PageItem name="Logout link">//a[@id='mHeader_mSignOutLink']</PageItem>
+
+  <!--User and School Preferences-->
+  <PageItem name="General link">//table[@class='tableSetting']//tr[contains(@id,'trUserPrefs')][1]/td[1]/a</PageItem>
+  <PageItem name="Benchmarks link">//table[@class='tableSetting']//tr[contains(@id,'trUserPrefs')][2]/td[1]/a</PageItem>
+
+  <!--Choose Your Class pop up-->
+  <PageItem name="Choose Your Class label">//form[@id='aspnetForm']/div[3]/div[2]/div[1]</PageItem>
+  <PageItem name="Teacher list">//div[@id='dvClassName']</PageItem>
+  <PageItem name="Done button">//input[contains(@id,'btnNext')]</PageItem>
+  <PageItem name="Checkbox image">//div[@style="visibility: visible;"]</PageItem>
